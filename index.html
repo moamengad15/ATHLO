@@ -2490,55 +2490,72 @@
                 background-color: rgba(255, 255, 255, 0.1) !important;
             }
 
-            /* أنماط التجاوب */
-            @media (max-width: 809.98px) {
-                .framer-1cj33qb {
-                    padding-top: 100px; 
-                    padding-bottom: 50px;
-                }
-                .framer-16yupg {
-                    display: none !important; 
-                }
-                .framer-1u9fn1i {
-                    max-width: 90%; 
-                    margin: 0 auto;
-                }
-                .framer-styles-preset-1xi0moi {
-                    font-size: 30px !important;
-                    margin-top: 20px !important; 
-                }
-                .framer-hqvtyn {
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-                .framer-ml18co {
-                    padding: 30px 20px;
-                    width: 100%;
-                }
-                .framer-styles-preset-1uj53y0 {
-                    font-size: 30px !important;
-                }
-                .framer-2t9q9i {
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                }
-                .framer-1lc4sod, .framer-niu125, .framer-z3qr5f {
-                    fill: black !important;
-                }
-                .framer-veekhx {
-                    justify-content: center !important;
-                    margin-top: 15px;
-                }
-                .framer-1q00ih2 {
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 5px;
-                }
-                .framer-hhff6m, .framer-i14inx {
-                    justify-content: center !important;
-                }
+        /* أنماط التجاوب */
+        @media (max-width: 809.98px) {
+            
+            /* الإخفاء الإجباري للشريط الجانبي (مهم جداً عدم حذفه) */
+            #mobile-hide-sidebar, 
+            .framer-16yupg, 
+            .framer-h08m15, 
+            .framer-poshd9, 
+            .framer-yr20cj, 
+            .framer-13fhr8 {
+                display: none !important;
             }
+            
+            .framer-1cj33qb {
+                padding-top: 100px; 
+                padding-bottom: 50px;
+                align-items: center !important; 
+            }
+            
+            .framer-1u9fn1i {
+                max-width: 90%; 
+                margin: 0 auto;
+            }
+            
+            /* 💥 التعديلات الجديدة لتقريب النصوص: زيادة التقريب */
+            .framer-styles-preset-1xi0moi {
+                font-size: 30px !important;
+                margin-top: 20px !important; 
+                line-height: 1.0em !important; /* تقليل المسافة بين أسطر العنوان العربي إلى 1.0em */
+            }
+            
+            .framer-hqvtyn {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            /* تقريب النصوص الرئيسية (سحب النص الإنجليزي للأعلى بقيمة -30px) */
+            .framer-1u9fn1i h1 strong.framer-text {
+                margin-bottom: 0 !important; 
+            }
+            .framer-1u9fn1i p.framer-text {
+                margin-top: -30px !important; /* زيادة التقريب */
+            }
+            /* نهاية تعديل النصوص */
+            
+            .framer-2t9q9i {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .framer-1lc4sod, .framer-niu125, .framer-z3qr5f {
+                fill: black !important;
+            }
+            .framer-veekhx {
+                justify-content: center !important;
+                margin-top: 15px;
+            }
+            .framer-1q00ih2 {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            .framer-hhff6m, .framer-i14inx {
+                justify-content: center !important;
+            }
+        }
         </style>
 
         <div data-framer-root class="framer-if0Ur framer-7Xw2H framer-10CCe framer-V67AN framer-O6yb5 framer-YMq9y framer-EL39e framer-72rtr7" style="min-height:100vh;width:auto">
@@ -2564,8 +2581,7 @@
                 <div style="position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0" data-framer-background-image-wrapper="true">
                     <img decoding="async" width="2382" height="1593" sizes="(min-width: 1200px) 100vw, (min-width: 810px) and (max-width: 1199.98px) 100vw, (max-width: 809.98px) 100vw" srcset="https://framerusercontent.com/images/LNd1RqsjuTtzmKfAILX5ZBrp4E.png?scale-down-to=512&amp;width=2382&amp;height=1593 512w,https://framerusercontent.com/images/LNd1RqsjuTtzmKfAILX5ZBrp4E.png?scale-down-to=1024&amp;width=2382&amp;height=1593 1024w,https://framerusercontent.com/images/LNd1RqsjuTtzmKfAILX5ZBrp4E.png?scale-down-to=2048&amp;width=2382&amp;height=1593 2048w,https://framerusercontent.com/images/LNd1RqsjuTtzmKfAILX5ZBrp4E.png?width=2382&amp;height=1593 2382w" src="https://framerusercontent.com/images/LNd1RqsjuTtzmKfAILX5ZBrp4E.png?width=2382&amp;height=1593" alt style="display:block;width:100%;height:100%;border-radius:inherit;object-position:center;object-fit:cover" data-framer-original-sizes="100vw">
                 </div>
-                <div class="framer-16yupg" style="opacity:1 !important; visibility:visible !important; display:flex !important; z-index:9999 !important; align-items:center; gap:10px; position:absolute; left:30px; top:50%; transform:translateY(-50%); flex-direction:column;">
-                    <div class="framer-h08m15"></div>
+                <div class="framer-16yupg hidden-uled6a" id="mobile-hide-sidebar" style="opacity:1 !important; visibility:visible !important; display:flex !important; z-index:9999 !important; align-items:center; gap:10px; position:absolute; left:30px; top:50%; transform:translateY(-50%); flex-direction:column;">                    <div class="framer-h08m15"></div>
                     <div class="framer-poshd9">
                         <div class="framer-no8t3a" data-framer-component-type="RichTextContainer" style="transform:rotate(-90deg)">
                             <p class="framer-text framer-styles-preset-8rgx27" data-styles-preset="GSIqSiyDW" style="--framer-text-alignment:center;" data-i18n="follow_us">تابعنا على</p>
