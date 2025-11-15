@@ -2633,7 +2633,7 @@
                 </div>
             </div>
             <div class="framer-1i41b95" data-framer-name="Main">
-                <div class="framer-hqvtyn" data-framer-name="form" id="form">
+                <div class="framer-hqvtyn" data-framer-name="form" id="form-container">
                     <div class="framer-ml18co" data-framer-name="Container">
                         <div class="framer-1kftvuo" data-framer-name="Top">
                             <div class="framer-m9h5ni" data-framer-name="Header">
@@ -2651,19 +2651,20 @@
                     <div class="framer-1r84kfr" data-framer-name="Services">
                         <form class="framer-vgyxak" id="form">
                             <label class="framer-cghzbh">
-                                <div class="framer-6qgk1r" data-framer-component-type="RichTextContainer" style="transform:none">
-                                    <p class="framer-text framer-styles-preset-1wjenho" data-styles-preset="td5uqtDLk">Name | الأسم </p>
+                                <div class="framer-6qgk1r" data-framer-component-type="RichTextContainer">
+                                    <p class="framer-text framer-styles-preset-1wjenho">Name | الأسم</p>
                                 </div>
                                 <div class="framer-form-text-input framer-form-input-wrapper framer-jxkzww">
-                                    <input type="text" name="Name" placeholder class="framer-form-input framer-form-input-empty">
+                                    <input type="text" name="Name" placeholder="أدخل الاسم" class="framer-form-input">
                                 </div>
                             </label>
+
                             <label class="framer-kisf2l">
-                                <div class="framer-rif8oa" data-framer-component-type="RichTextContainer" style="transform:none">
-                                    <p class="framer-text framer-styles-preset-1wjenho" data-styles-preset="td5uqtDLk">PHONE | رقم الجوال </p>
+                                <div class="framer-rif8oa" data-framer-component-type="RichTextContainer">
+                                    <p class="framer-text framer-styles-preset-1wjenho">PHONE | رقم الجوال</p>
                                 </div>
                                 <div class="framer-form-text-input framer-form-input-wrapper framer-47bth3">
-                                    <input type="tel" name="Phone" placeholder class="framer-form-input framer-form-input-empty">
+                                    <input type="tel" name="Phone" placeholder="أدخل رقم الجوال" class="framer-form-input">
                                 </div>
                             </label>
                             <div class="framer-1tigpt1-container">
@@ -2808,34 +2809,43 @@
         };
 
         function setLanguage(lang) {
+            // تعيين اللغة والاتجاه
             document.documentElement.setAttribute('lang', lang);
             document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
 
+            // ترجمة العناصر اللي فيها data-i18n
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     element.innerHTML = translations[lang][key];
                 }
             });
 
-            if (lang === 'en') {
-                document.querySelector('select[name="Location"] option[value="اختر"]').textContent = translations.en.option_select;
-                document.querySelector('select[name="Location"] option[value="ذكر"]').textContent = translations.en.option_male;
-                document.querySelector('select[name="Location"] option[value="انثى"]').textContent = translations.en.option_female;
-            } else {
-                document.querySelector('select[name="Location"] option[value="اختر"]').textContent = translations.ar.option_select;
-                document.querySelector('select[name="Location"] option[value="ذكر"]').textContent = translations.ar.option_male;
-                document.querySelector('select[name="Location"] option[value="انثى"]').textContent = translations.ar.option_female;
+            // ترجمة خيارات select[name="Location"] بأمان
+            const optionsMap = {
+                "اختر": "option_select",
+                "ذكر": "option_male",
+                "انثى": "option_female"
+            };
+
+            for (const [value, key] of Object.entries(optionsMap)) {
+                const option = document.querySelector(`select[name="Location"] option[value="${value}"]`);
+                if(option && translations[lang] && translations[lang][key]) {
+                    option.textContent = translations[lang][key];
+                }
             }
 
+            // تحديث قيمة المحدد إذا موجود
             const langSelector = document.getElementById('lang-selector');
             if (langSelector) {
                 langSelector.value = lang;
             }
 
+            // حفظ اللغة المفضلة
             localStorage.setItem('preferredLanguage', lang);
         }
 
+        // تنفيذ بعد تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
             setLanguage(savedLang);
@@ -2847,6 +2857,56 @@
                 });
             }
         });
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
+            setLanguage(savedLang);
+
+            const langSelector = document.getElementById('lang-selector');
+            if (langSelector) {
+                langSelector.addEventListener('change', (e) => {
+                    const selectedLang = e.target.value;
+                    setLanguage(selectedLang);
+                    localStorage.setItem('preferredLanguage', selectedLang);
+                });
+            }
+        });
+
     </script>
+    <script>
+    document.getElementById("form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const Name = form.elements["Name"].value;
+        const Phone = form.elements["Phone"].value;
+
+        fetch("https://script.google.com/macros/s/AKfycbzIajKrK6ihRNh8btLw9UWc1qAHxMnsKJDc-6v18ZC-4dcKiHQdTqBHroMyBYXYs5mb7A/exec", { // ضع هنا رابط Web App النهائي
+            method: "POST",
+            body: JSON.stringify({Name, Phone}),
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.result === "success"){
+                alert("تم الإرسال بنجاح!");
+                form.reset();
+            } else {
+                alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+        });
+    });
+    </script>
+
+
+
+
 </body>
 </html>
