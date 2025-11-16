@@ -2649,33 +2649,45 @@
                         </div>
                     </div>
                     <div class="framer-1r84kfr" data-framer-name="Services">
-                        <form class="framer-vgyxak" id="form">
-                            <label class="framer-cghzbh">
-                                <div class="framer-6qgk1r" data-framer-component-type="RichTextContainer">
-                                    <p class="framer-text framer-styles-preset-1wjenho">Name | الأسم</p>
-                                </div>
-                                <div class="framer-form-text-input framer-form-input-wrapper framer-jxkzww">
-                                    <input type="text" name="Name" placeholder="أدخل الاسم" class="framer-form-input">
-                                </div>
-                            </label>
-
-                            <label class="framer-kisf2l">
-                                <div class="framer-rif8oa" data-framer-component-type="RichTextContainer">
-                                    <p class="framer-text framer-styles-preset-1wjenho">PHONE | رقم الجوال</p>
-                                </div>
-                                <div class="framer-form-text-input framer-form-input-wrapper framer-47bth3">
-                                    <input type="tel" name="Phone" placeholder="أدخل رقم الجوال" class="framer-form-input">
-                                </div>
-                            </label>
-                            <div class="framer-1tigpt1-container">
-                                <button type="submit" class="framer-ahsXt framer-7Xw2H framer-1pgxya8 framer-v-1pgxya8" data-framer-name="Default" data-reset="button" tabindex="0" style="background-color:var(--token-5a67503f-1ae2-4775-a31f-fc56f3ff9fb8, rgb(168, 30, 30));border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-top-left-radius:10px;border-top-right-radius:10px;height:100%;width:100%;opacity:1">
-                                    <div class="framer-1qvh1x6" data-framer-component-type="RichTextContainer" style="--framer-link-text-color:rgb(0, 153, 255);--framer-link-text-decoration:underline;transform:none">
-                                        <p class="framer-text framer-styles-preset-8rgx27" data-styles-preset="GSIqSiyDW" data-i18n="btn_submit">أرســـــال</p>
-                                    </div>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                      <form class="framer-vgyxak" 
+                            id="form" 
+                            action="https://script.google.com/macros/s/AKfycbwYU8tmreppWlS0XuZYtsnrHS-2u-bfIzk8r9MbYOCH5a6TkKu1pxpW9hNtiE5qhOFC/exec" 
+                            method="POST" 
+                            target="hidden_iframe">
+                  
+                          <label class="framer-cghzbh">
+                              <div class="framer-6qgk1r" data-framer-component-type="RichTextContainer">
+                                  <p class="framer-text framer-styles-preset-1wjenho">Name | الأسم</p>
+                              </div>
+                              <div class="framer-form-text-input framer-form-input-wrapper framer-jxkzww">
+                                  <input type="text" name="Name" placeholder="أدخل الاسم" class="framer-form-input" required>
+                              </div>
+                          </label>
+                  
+                          <label class="framer-kisf2l">
+                              <div class="framer-rif8oa" data-framer-component-type="RichTextContainer">
+                                  <p class="framer-text framer-styles-preset-1wjenho">PHONE | رقم الجوال</p>
+                              </div>
+                              <div class="framer-form-text-input framer-form-input-wrapper framer-47bth3">
+                                  <input type="tel" name="Phone" placeholder="أدخل رقم الجوال" class="framer-form-input" required>
+                              </div>
+                          </label>
+                  
+                          <div class="framer-1tigpt1-container">
+                              <button type="submit" class="framer-ahsXt framer-7Xw2H framer-1pgxya8 framer-v-1pgxya8" 
+                                      data-framer-name="Default" data-reset="button" tabindex="0" 
+                                      style="background-color: rgb(168, 30, 30); border-radius: 10px; height:100%; width:100%; opacity:1">
+                                  <div class="framer-1qvh1x6" data-framer-component-type="RichTextContainer" 
+                                       style="--framer-link-text-color:rgb(0, 153, 255);--framer-link-text-decoration:underline;transform:none">
+                                      <p class="framer-text framer-styles-preset-8rgx27" data-styles-preset="GSIqSiyDW" data-i18n="btn_submit">أرســـــال</p>
+                                  </div>
+                              </button>
+                          </div>
+                      </form>
+                  
+                      <!-- iframe مخفي لتجنب إعادة تحميل الصفحة -->
+                      <iframe name="hidden_iframe" style="display:none;"></iframe>
+                  </div>
                 </div>
                 <div class="framer-9hv903" data-framer-name="footer" style="padding-top:5px; padding-bottom:5px; height:auto; line-height:1;">
                     <div class="framer-1t2pytw" data-framer-name="Container" style="padding-bottom:0;">
@@ -2875,38 +2887,20 @@
             }
         });
 
-    </script>
-    <script>
-    document.getElementById("form").addEventListener("submit", function(e) {
-        e.preventDefault();
 
-        const form = e.target;
-        const Name = form.elements["Name"].value;
-        const Phone = form.elements["Phone"].value;
+        
+        const form = document.getElementById("form");
 
-        fetch("https://script.google.com/macros/s/AKfycbxUD-l9WzC653BaC9p5hYzapvz0cx05XcrSrcYIsLh5hMzPqENJfjkphxaK5cc_q7KInQ/exec", { // ضع هنا رابط Web App النهائي
-            method: "POST",
-            body: JSON.stringify({Name, Phone}),
-            headers: {"Content-Type": "application/json"}
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.result === "success"){
-                alert("تم الإرسال بنجاح!");
-                form.reset();
-            } else {
-                alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
-        });
+    form.addEventListener("submit", () => {
+        
+        setTimeout(() => {
+            alert("✔️ تم إرسال البيانات بنجاح!");
+            form.reset();
+        }, 500);
     });
+
     </script>
-
-
-
+    
 
 </body>
 </html>
